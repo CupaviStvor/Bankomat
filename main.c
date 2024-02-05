@@ -250,11 +250,12 @@ void logIn_Client(char * username, char * password){
     int stanje;
 
     while(fgets(line, BUFF, fptr) && find == 1){
-        ptr = strchr(line, '\n');
+         ptr = strchr(line, '\n');
 
         if(ptr){
             *ptr = '\0';
         }
+       
 
         ptr = strtok(line, ":");
         User = ptr;
@@ -398,13 +399,14 @@ void load_Info(){
         return;
     }
 
-    while(fscanf(ptr,"%[^:]:%[^:]:%[^:]:%d", user, ime, prezime, &stanje) == 4){
+    while(fscanf(ptr," %[^:]:%[^:]:%[^:]:%d", user, ime, prezime, &stanje) == 4){
+      
         if(strcmp(user, cur_User.username) == 0 && stanje != cur_User.stanje){
-            fprintf(temp, "%s:%s:%s:%d", user, ime, prezime, cur_User.stanje);
+            fprintf(temp, "%s:%s:%s:%d\n", user, ime, prezime, cur_User.stanje);
             continue;
         }
         
-        fprintf(temp, "%s:%s:%s:%d", user, ime, prezime, stanje);
+        fprintf(temp, "%s:%s:%s:%d\n", user, ime, prezime, stanje);
     }
 
     fclose(ptr);
